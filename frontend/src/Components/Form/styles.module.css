@@ -1,0 +1,42 @@
+.modal {
+  margin: auto;
+  text-align: center;
+  width: 500px;
+  height: 300px;
+  background-color: rgba(155, 152, 152, 0.652);
+}
+
+.btn {
+  cursor: pointer;
+  display: flex;
+  margin: auto;
+  margin-top: 20px;
+  text-align: center;
+  justify-content: center;
+  width: 300px;
+  height: 20px;
+  background-color: rgb(184, 135, 87);
+  border: none;
+  border-radius: 5%;
+}
+
+.btn:hover {
+  background-color: rgb(123, 83, 43);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: auto;
+}
+
+.form input {
+  text-align: center;
+}
+
+.error {
+  background-color: red;
+  color: #fff;
+  font-weight: 300;
+}
