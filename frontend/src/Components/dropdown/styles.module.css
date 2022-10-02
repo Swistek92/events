@@ -1,7 +1,10 @@
 .dropbtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #fff;
   background-color: #3029b650;
-  padding: 16px;
+  padding: 36px;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -9,6 +12,7 @@
   width: 100px;
   height: 15px;
   margin: auto;
+  text-align: center;
 }
 
 .dropbtn:hover {

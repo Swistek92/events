@@ -1,10 +1,11 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useContext } from 'react';
 import Calendar from 'react-calendar';
 import Input from '../inputs/Input';
 import Dropdown from '../dropdown/dropdown';
 import styles from './styles.module.css';
 import { validateEventData } from '../../utils/validators';
 import { sendEventData } from '../../utils/http';
+import NotificationContext from '../../store/notification-context';
 
 const initialState = {
   firstName: '',
@@ -56,6 +57,7 @@ function personReducer(prevState = initialState, action) {
 const Event = () => {
   const [userData, dispatch] = useReducer(personReducer, initialState);
   const { firstName, lastName, email, date } = userData;
+  const notificationCtx = useContext(NotificationContext);
 
   const [error, setError] = useState('');
   const localDate = date.toLocaleDateString('en-us');
@@ -64,13 +66,28 @@ const Event = () => {
     e.preventDefault();
 
     try {
+      notificationCtx.showNotification({
+        title: 'registring for event',
+        message: 'registring for event',
+        status: 'pending',
+      });
       validateEventData(userData);
       await sendEventData(userData);
+      notificationCtx.showNotification({
+        title: 'Success!',
+        message: 'Successfully registered for event!',
+        status: 'success',
+      });
       dispatch({ type: personActionTypes.resetPerson });
       setError('');
     } catch (error) {
       console.log(error);
-      setError(error.message || error || 'smth went wrong');
+      // setError(error.message || error || 'smth went wrong');
+      notificationCtx.showNotification({
+        title: 'Error!',
+        message: error.message || error || 'smth went wrong',
+        status: 'error',
+      });
     }
   };
 

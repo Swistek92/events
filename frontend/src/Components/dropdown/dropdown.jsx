@@ -3,7 +3,9 @@ import styles from './styles.module.css';
 const Dropdown = (props) => {
   return (
     <div className={styles.dropdown}>
-      <div className={styles.dropbtn}>{props.name}</div>
+      <div className={styles.dropbtn}>
+        <p>{props.name}</p>
+      </div>
       <div className={styles.dropdownContent}>{props.children}</div>
     </div>
   );
