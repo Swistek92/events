@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useContext } from 'react';
+import React, { useReducer, useContext } from 'react';
 import Calendar from 'react-calendar';
 import Input from '../inputs/Input';
 import Dropdown from '../dropdown/dropdown';
@@ -58,8 +58,6 @@ const Event = () => {
   const [userData, dispatch] = useReducer(personReducer, initialState);
   const { firstName, lastName, email, date } = userData;
   const notificationCtx = useContext(NotificationContext);
-
-  const [error, setError] = useState('');
   const localDate = date.toLocaleDateString('en-us');
 
   const onSubmit = async (e) => {
@@ -79,10 +77,7 @@ const Event = () => {
         status: 'success',
       });
       dispatch({ type: personActionTypes.resetPerson });
-      setError('');
     } catch (error) {
-      console.log(error);
-      // setError(error.message || error || 'smth went wrong');
       notificationCtx.showNotification({
         title: 'Error!',
         message: error.message || error || 'smth went wrong',
@@ -126,7 +121,6 @@ const Event = () => {
           />
         </Dropdown>
 
-        {error && <h4 className={styles.error}> {error}</h4>}
         <button type='submit' className={styles.btn}>
           send a request
         </button>
